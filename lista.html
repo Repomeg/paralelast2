@@ -3,18 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./style.css">
-  <title>POKEDEX</title>
+  <title>Listado de pokemon</title>
 </head>
 <body>
- <h1>POKE API</h1>
- <a href="busqueda.html">
-  <input type="submit" value="Busqueda"/>
-</a>
- <div class="container-card" id="ListaPoke">
+  <div class="cabecera">
+    <ul class="nav navbar-dark bg-primary">
+      <li class="nav-item">
+        <a class="text-white nav-link active" aria-current="page" href="menu.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="text-white nav-link" href="buscarpoke.html">Buscar por ID</a>
+      </li>
+      <li class="nav-item">
+        <a class="text-white nav-link" href="lista.html">Ver lista pokemon</a>
+      </li>
+    </ul>
+    </div>
+ <h1 class="text-center">Listado de pokemon</h1>
+ 
+ <div class="container-card justify-content" id="ListaPoke">
  </div>
  <div id="botones" class="botones"></div>
+ 
+<div class="text-center">
+  <a href="menu.html">
+   <input type="submit" value="Volver al menu"/>
+ </a>
+ </div>
   <script src="js.js"></script>
 </body>
 </html>

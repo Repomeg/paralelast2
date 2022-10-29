@@ -3,17 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>
+    <title>Menu principal pokeapi</title>
+    
 </head>
 <body>
-    <h1>MENU</h1>
-    <a href="buscarpoke.html">
-        <input type="submit" value="Busqueda"/>
+  <!-- <div class="has-bg-img img-fluid"> -->
+  <div class="cabecera">
+    <ul class="nav navbar-dark bg-primary">
+      <li class="nav-item">
+        <a class="text-white nav-link active" aria-current="page" href="menu.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="text-white nav-link" href="buscarpoke.html">Buscar por ID</a>
+      </li>
+      <li class="nav-item">
+        <a class="text-white nav-link" href="lista.html">Ver lista pokemon</a>
+      </li>
+    </ul>
+    </div>
+    <h1 class="text-center">¡Bienvenido a la pokeapi!</h1>
+    <br>
+    <h2 class="text-center">¿Qué desea hacer?</h2>
+    <br>
+    <div class="text-center">
+    <a href="buscarpoke.html" >
+        <input type="submit" value="Busqueda por ID"/>
       </a>
-      <br>
+      
     <a href="lista.html">
-        <input type="submit" value="Listado de Pokemones"/>
+        <input type="submit" value="Ver listado de Pokemones"/>
       </a>
-</body>
+    </div>
+    <!-- <img class="bg-img" src="img/POKEMON.jpg" alt=""> -->
+  <!-- </div> -->
+    </body>
 </html>
