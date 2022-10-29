@@ -1,54 +1,97 @@
-let pokemonsList = document.getElementById("pokemons-list");
-let links = document.getElementById("links");
-let total = document.getElementById("total");
+let pokelista = document.getElementById("ListaPoke")
+const botones=document.getElementById("botones");
+const botonlista=document.getElementById("botonlista");
 
-
-
-function updatePokemons(url) {
-  if (url) {
-
-    //Reiniciamos pokemones actuales
-    pokemonsList.innerHTML = "";
-    // Llamamos a la API de pokemon con Fetch
-    fetch(url)
-      .then(res => res.json())
-      .then(res => {
-        // Obtenemos y recorremos a los primeros 20 pokemones obtenidos
-        for (let i of res.results) {
-
-          // Realizamos otra solicitud Fetch con la URL especifica del pokemon actual recorrido, para obtener datos mas especficos como la imagen
-          fetch(i.url)
-            .then(x => x.json())
-            .then(x => {
-              // Vamos pintando o ingresando la imagen y nombre del pokemon actual que se esta evaluando 
-              pokemonsList.innerHTML += `<div class="card">
-                                                  <img src="${x.sprites.front_default}" alt="">
-                                                  <p>${x.id}</p>
-                                                  <p>${x.name}</p>
-                                                  <p>${x.height}</p>
-                                                  <p>${x.weight}</p>
-                                                  <p>${x.type}</p>
-                                                  <p>${x.form}</p>
-                                                  <p>${x.skill}</p>
-                                                  <p>${x.location}</p>
-
-                                              </div>`;
-            });
-        };
-        
-
-         //total.innerHTML = "";
-         //for (let i of res.results) {
-         //}
-        // Pintamos los enlaces de siguiente o anterior de la paginacion de los pokemones 
-        //Boton hacia atrás
-        links.innerHTML = (res.previous) ? `<button onclick="updatePokemons('${res.previous}')">Atrás</button>` : "";
-        //Botón hacia adelante
-        links.innerHTML += (res.next) ? `<button onclick="updatePokemons('${res.next}')">Siguiente</button>` : "";
-
-      });
-  }
-
+function imprimirarray(arreglo){
+ for(let ai of arreglo){
+  pokelista.innerHTML+=`
+               <p> ${ai.type.name}</p> 
+               `
+ }
 }
 
-updatePokemons("https://pokeapi.co/api/v2/pokemon");
+
+function LlamadaApi(url) {
+  pokelista.innerHTML="";
+    fetch(url)
+    .then(res=>res.json())
+    .then(res=> {
+      for(let i of res.results){
+        fetch(i.url)
+          .then(x=>x.json())
+          .then(x=>{
+            let tipo="";
+            x.types.forEach(element => {
+              tipo+=`${element.type.name}<br>`;
+            });
+            let formas="";
+            x.forms.forEach(element =>{
+              formas+=`${element.name}<br>`;
+            });
+            let habilidades="";
+            x.abilities.forEach(element =>{
+              habilidades+=`${element.ability.name} <br>`;
+            });
+            pokelista.innerHTML+= `<div class="card">
+            <img src="${x.sprites.front_default}">
+            <p>ID ${x.id}</p>
+            <p>Nombre ${x.name}</p>
+            <p>Altura ${x.height/10} m</p>
+            <p>Peso ${x.weight/10} Kg</p>
+            <p>Tipo: ${tipo} </p>        
+            <p>Formas: ${formas}</p>  
+            <p>Habilidades: ${habilidades}</p>  
+            <p>Ubicacion: </p>
+            </div>`
+          
+          });
+      };
+        // Mostramos Los botones a los enlaces de siguiente o anterior de la paginacion de los pokemones 
+        //Boton hacia atrás
+        botones.innerHTML = (res.previous) ? `<button onclick="LlamadaApi('${res.previous}')">Atrás</button>` : "";
+        //Botón hacia adelante
+        botones.innerHTML += (res.next) ? `<button onclick="LlamadaApi('${res.next}')">Siguiente</button>` : "";
+  });
+}
+
+
+LlamadaApi("https://pokeapi.co/api/v2/pokemon?offset=0&limit=10");
+
+function buscar(){
+  BusquedaPoke.innerHTML="";
+  botonlista.innerHTML="";
+ var idpoke= document.getElementById("pokeid").value;
+ fetch(`https://pokeapi.co/api/v2/pokemon/${idpoke}/`)
+ .then(res=>res.json())
+ .then(res=> {
+  let tipo="";
+  res.types.forEach(element => {
+    tipo+=`${element.type.name}<br>`;
+  });
+  let formas="";
+  res.forms.forEach(element =>{
+    formas+=`${element.name}<br>`;
+  });
+  let habilidades="";
+  res.abilities.forEach(element =>{
+    habilidades+=`${element.ability.name} <br>`;
+  });
+
+
+  BusquedaPoke.innerHTML+= `<div class="card">
+  <img src="${res.sprites.front_default}">
+  <p>ID ${res.id}</p>
+  <p>Nombre ${res.name}</p>
+  <p>Altura ${res.height/10} m</p>
+  <p>Peso ${res.weight/10} Kg</p>
+  <p>Tipo: ${tipo} </p>        
+  <p>Formas: ${formas}</p>  
+  <p>Habilidades: ${habilidades}</p>  
+  <p>Ubicacion: </p>
+  </div>`
+
+   botonlista.innerHTML+=`<a href="index.html">
+   <input type="submit" value="Inicio"/>
+ </a>`
+ })
+}
